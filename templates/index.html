@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section id="about" class="section fade-in">
+  <img src="{{ url_for('static', filename='images/vela_logo.png') }}" alt="Profile Picture" class="profile">
+  <div>
+    <h1>Hi, I’m Dennis Musyoki</h1>
+    <p>Full‑stack developer focused on building high‑quality web applications with Flask, Python, and modern front‑end tech.</p>
+  </div>
+</section>
+
+<section id="skills" class="section bg-light fade-in">
+  <h2>Skills</h2>
+  <ul class="skills">
+    <li>Python / Flask</li>
+    <li>HTML / CSS / JS</li>
+    <li>SQL / Databases</li>
+    <li>Version Control / Git</li>
+  </ul>
+</section>
+
+<section id="projects" class="section fade-in">
+  <h2>Projects</h2>
+  <div class="project-grid">
+    <div class="project">
+      <h3>Enterprise Dashboard</h3>
+      <p>A secure analytics dashboard built with Flask, Chart.js, and PostgreSQL.</p>
+    </div>
+    <div class="project">
+      <h3>API Manager</h3>
+      <p>Backend service for managing APIs and integrations in Python.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section bg-light fade-in">
+  <h2>Contact</h2>
+  <form action="{{ url_for('contact') }}" method="POST" class="contact-form">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+{% endblock %}
