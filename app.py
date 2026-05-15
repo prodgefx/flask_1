@@ -15,7 +15,7 @@ app.config.update(
     MAIL_PASSWORD=os.getenv("MAIL_PASSWORD"),
 )
 
-app.secret_key = "supersecretkey"  # for flash messages
+app.secret_key = os.getenv("SECRET_KEY")  # for flash messages
 
 mail = Mail(app)
 
