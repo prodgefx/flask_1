@@ -3,28 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Compatible with both Django and Flask string syntax -->
     <title>{{ title if title else "Developer Portfolio" }}</title>
-    <!-- Updated path using Jinja url_for -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <header class="navbar">
         <div class="logo">PRODGE.dev</div>
+        
+        <!-- Toggle button placed right here; CSS will control its visual end position -->
+        <button class="menu-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
         <nav>
-            <ul>
+            <ul id="nav-list">
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <!-- Added GitHub Link to Navbar -->
                 <li><a href="https://github.com/prodgefx" target="_blank" class="github-nav-link">GitHub</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- UNIVERSAL FLASH MESSAGES (Handles both Flask and Django) -->
-    <!-- 1. Django Messages Framework -->
     {% if messages and not get_flashed_messages %}
       <div class="flash">
         {% for message in messages %}
@@ -33,7 +36,6 @@
       </div>
     {% endif %}
 
-    <!-- 2. Flask Flash Framework -->
     {% if get_flashed_messages %}
       {% with flask_messages = get_flashed_messages(with_categories=true) %}
         {% if flask_messages %}
@@ -54,7 +56,6 @@
       <p>© <span id="copyright-year">2026</span> PRODGE — All rights reserved.</p>
     </footer>
 
-    <!-- Updated path using Jinja url_for -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

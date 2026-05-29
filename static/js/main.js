@@ -5,7 +5,25 @@ document.addEventListener("DOMContentLoaded", () => {
     yearSpan.textContent = new Date().getFullYear();
   }
 
-  // Your existing Fade-in Observer Code
+  // Mobile Menu Dropdown Toggle Logic
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navList = document.getElementById('nav-list');
+
+  if (menuToggle && navList) {
+    menuToggle.addEventListener('click', () => {
+      navList.classList.toggle('active');
+    });
+
+    // Close the dropdown layout when a section link is clicked
+    const navLinks = navList.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navList.classList.remove('active');
+      });
+    });
+  }
+
+  // Existing Fade-in Observer Code
   const sections = document.querySelectorAll('.fade-in');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
