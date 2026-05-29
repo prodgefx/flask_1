@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Compatible with both Django and Flask string syntax -->
     <title>{{ title if title else "Developer Portfolio" }}</title>
+    <!-- Updated path using Jinja url_for -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
@@ -15,28 +17,44 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <!-- Added GitHub Link to Navbar -->
+                <li><a href="https://github.com/your-username" target="_blank" class="github-nav-link">GitHub</a></li>
             </ul>
         </nav>
     </header>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <div class="flash">
-          {% for category, message in messages %}
-            <div class="flash-{{ category }}">{{ message }}</div>
-          {% endfor %}
-        </div>
-      {% endif %}
-    {% endwith %}
+    <!-- UNIVERSAL FLASH MESSAGES (Handles both Flask and Django) -->
+    <!-- 1. Django Messages Framework -->
+    {% if messages and not get_flashed_messages %}
+      <div class="flash">
+        {% for message in messages %}
+          <div class="flash-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <!-- 2. Flask Flash Framework -->
+    {% if get_flashed_messages %}
+      {% with flask_messages = get_flashed_messages(with_categories=true) %}
+        {% if flask_messages %}
+          <div class="flash">
+            {% for category, message in flask_messages %}
+              <div class="flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+    {% endif %}
 
     <main>
         {% block content %}{% endblock %}
     </main>
 
     <footer>
-      <p>© <span id="copyright-year">2024</span> PRODGE — All rights reserved.</p>
+      <p>© <span id="copyright-year">2026</span> PRODGE — All rights reserved.</p>
     </footer>
 
+    <!-- Updated path using Jinja url_for -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

@@ -2,20 +2,27 @@
 {% block content %}
 
 <section id="about" class="section fade-in">
+  <!-- Updated path using Jinja url_for -->
   <img src="{{ url_for('static', filename='images/vela_logo.png') }}" alt="Profile Picture" class="profile">
-  <div>
+  <div class="about-text">
     <h1>Hi, I’m Dennis Musyoki</h1>
-    <p>Full‑stack developer focused on building high‑quality web applications with Flask, Python, and modern front‑end tech.</p>
+    <p>Full‑stack developer focused on building high‑quality web applications with Flask, Django, Python, and modern front‑end tech.</p>
   </div>
 </section>
 
 <section id="skills" class="section bg-light fade-in">
   <h2>Skills</h2>
   <ul class="skills">
-    <li>Python / Flask</li>
-    <li>HTML / CSS / JS</li>
-    <li>SQL / Databases</li>
-    <li>Version Control / Git</li>
+    <!-- Cross-compatible loop block that passes both Jinja2 and Django constraints -->
+    {% for skill in skills %}
+      <li>{{ skill }}</li>
+    {% else %}
+      <!-- Fallback defaults if no dynamic list context variable is passed from the server view -->
+      <li>Python / Flask / Django</li>
+      <li>HTML / CSS / JS</li>
+      <li>SQL / Databases</li>
+      <li>Version Control / Git</li>
+    {% endfor %}
   </ul>
 </section>
 
@@ -24,7 +31,7 @@
   <div class="project-grid">
     <div class="project">
       <h3>Enterprise Dashboard</h3>
-      <p>A secure analytics dashboard built with Flask, Chart.js, and PostgreSQL.</p>
+      <p>A secure analytics dashboard built with Flask, Django, Chart.js, and PostgreSQL.</p>
     </div>
     <div class="project">
       <h3>API Manager</h3>
@@ -35,7 +42,10 @@
 
 <section id="contact" class="section bg-light fade-in">
   <h2>Contact</h2>
-  <form action="{{ url_for('contact') }}" method="POST" class="contact-form">
+  <form action="" method="POST" class="contact-form">
+    <!-- Django requires this token. Flask safely ignores it unless using custom extensions like WTForms -->
+    {% if csrf_token %}<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">{% endif %}
+    
     <input type="text" name="name" placeholder="Your Name" required>
     <input type="email" name="email" placeholder="Your Email" required>
     <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
