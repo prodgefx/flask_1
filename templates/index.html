@@ -42,7 +42,7 @@
 
 <section id="contact" class="section bg-light fade-in">
   <h2>Contact</h2>
-  <form action="" method="POST" class="contact-form">
+  <form action="{{ url_for('contact') }}" method="POST" class="contact-form">
     <!-- Django requires this token. Flask safely ignores it unless using custom extensions like WTForms -->
     {% if csrf_token %}<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">{% endif %}
     
